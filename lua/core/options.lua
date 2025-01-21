@@ -20,11 +20,10 @@ opt.smartcase = true
 opt.cursorline = true
 
 -- styling
-opt.termguicolors = true
-opt.background = "dark"
 opt.signcolumn = "yes"
+opt.termguicolors = true
 
--- backspace 
+-- backspace
 opt.backspace = "indent,eol,start"
 
 -- clipboard
@@ -33,4 +32,3 @@ opt.clipboard:append("unnamedplus") -- use system clipboard
 -- split windows
 opt.splitright = true
 opt.splitbelow = true
-
