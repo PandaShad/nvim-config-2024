@@ -10,6 +10,26 @@ return {
     config = function()
       local builtin = require("telescope.builtin")
 
+      require('telescope').setup({
+        defaults = {
+          prompt_prefix = "   ",
+          selection_caret = " ",
+          entry_prefix = " ",
+          sorting_strategy = "ascending",
+          layout_config = {
+            horizontal = {
+            prompt_position = "top",
+            preview_width = 0.55,
+            },
+            width = 0.87,
+            height = 0.80,
+          },
+          mappings = {
+            n = { ["q"] = require("telescope.actions").close },
+          },
+        }
+      })
+
       -- set keymaps
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files in cwd' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live_grep' })

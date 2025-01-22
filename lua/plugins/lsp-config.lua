@@ -2,7 +2,15 @@ return {
   {
     "williamboman/mason.nvim",
     config = function()
-      require("mason").setup()
+      require("mason").setup({
+        ui = {
+          icons = {
+          package_pending = " ",
+          package_installed = " ",
+            package_uninstalled = " ",
+          },
+        }
+      })
     end
   },
   {
@@ -21,7 +29,10 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    lazy = false,
     config = function()
+      local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
       local lspconfig = require("lspconfig")
       local mason_lspconfig = require("mason-lspconfig")
 
@@ -74,7 +85,9 @@ return {
       mason_lspconfig.setup_handlers({
         -- default handler for installed servers
         function(server_name)
-          lspconfig[server_name].setup({})
+          lspconfig[server_name].setup({
+            capabilities = capabilities
+          })
         end,
         ["lua_ls"] = function()
           -- configure lua server (with special settings)

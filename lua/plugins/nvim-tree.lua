@@ -7,26 +7,36 @@ return {
 		vim.g.loaded_netrwPlugin = 1
 
 		require("nvim-tree").setup({
+      hijack_cursor = true,
+      sync_root_with_cwd = true,
+      update_focused_file = {
+        enable = true,
+        update_root = false,
+      },
 			view = {
-				width = 35,
-				relativenumber = true,
+				width = 30,
+        preserve_window_proportions = true,
 			},
 			renderer = {
+        root_folder_label = false,
+        highlight_git = true,
+        indent_markers = { enable = true },
 				group_empty = true,
-			},
-			actions = {
-				open_file = {
-					window_picker = {
-						enable = false,
-					},
-				},
-			},
-			filters = {
-				custom = { ".DS_Store" },
-			},
-			git = {
-				ignore = false,
-			},
+        icons = {
+          glyphs = {
+            default = "󰈚",
+              folder = {
+              default = "",
+              empty = "",
+              empty_open = "",
+              open = "",
+              symlink = "",
+            },
+            git = { unmerged = "" },
+			    },
+        },
+      },
+			filters = { dotfiles = true },
 		})
 
 		-- keymaps

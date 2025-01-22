@@ -37,5 +37,9 @@
         "/home/lilshad/.local/share/nvim/lazy/nvim-autopairs/lua",
         "/home/lilshad/.config/nvim/lua",
         "${3rd}/luv/library"
+    ],
+    "diagnostics.globals": [
+        "vim",
+        "wesh"
     ]
 }
