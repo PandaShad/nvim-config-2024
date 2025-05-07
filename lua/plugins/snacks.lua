@@ -5,21 +5,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = {
-    explorer = {
-      enabled = true,
-      layout = {
-        cycle = false,
-      },
-    },
-    indent = { enabled = true },
-    input = { enabled = true },
-    notifier = { enabled = true },
-    scope = { enabled = true },
-    scroll = { enabled = true },
-    statuscolumn = { enabled = false }, -- we set this in options.lua
-    toggle = { map = utils.safe_keymap_set },
-    words = { enabled = true },
-
     dashboard = {
       preset = {
         enabled = true,
@@ -27,7 +12,37 @@ return {
         text = "Snacks",
         color = "#ff9e64",
       }
-    }
+    },
+    explorer = {
+      enabled = true,
+      layout = {
+        cycle = false,
+      },
+    },
+    image = { enabled = true }
+    indent = { enabled = true },
+    input = { enabled = true },
+    notifier = { enabled = true },
+    picker = {
+      enabled = true,
+      layout = {
+        preset = "telescope",
+        cycle = false,
+      },
+      matchers = {
+        frecency = true,
+        cwd_bonus = false,
+      },
+    },
+    quickfile = {
+      enabled = true,
+      exclude = { "latex" },
+    },
+    scope = { enabled = true },
+    scroll = { enabled = true },
+    statuscolumn = { enabled = false }, -- we set this in options.lua
+    toggle = { map = utils.safe_keymap_set },
+    words = { enabled = true },
   },
   keys = {
     { "<leader>lg", function() require("snacks").lazygit() end, desc = "Lazygit" },
