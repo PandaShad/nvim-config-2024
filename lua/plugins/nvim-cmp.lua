@@ -38,7 +38,7 @@ return {
 			Field = " ",
 			File = " ",
 			Folder = " ",
-			Function = " ",
+			Function = "󰊕 ",
 			Interface = " ",
 			KeyWord = " ",
 			Method = " ",
