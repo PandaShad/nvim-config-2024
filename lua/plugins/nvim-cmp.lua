@@ -1,5 +1,6 @@
 return {
 	"hrsh7th/nvim-cmp",
+	branch = "main",
 	dependencies = {
 		"hrsh7th/cmp-buffer", -- source for text in buffer
 		"hrsh7th/cmp-path", -- source for file system paths
@@ -33,14 +34,14 @@ return {
 			Constant = " ",
 			Constructor = " ",
 			Enum = " ",
-			EnumMember = " ",
+			EnumMember = " ",
 			Event = " ",
 			Field = " ",
 			File = " ",
 			Folder = " ",
 			Function = "󰊕 ",
 			Interface = " ",
-			KeyWord = " ",
+			Keyword = " ",
 			Method = " ",
 			Module = " ",
 			Namespace = " ",
@@ -52,7 +53,7 @@ return {
 			Text = " ",
 			TypeParameter = " ",
 			Unit = " ",
-			Value = " ",
+			Value = "󱙝 ",
 			Variable = " ",
 		}
 
@@ -205,7 +206,7 @@ return {
 			experimental = {
 				-- HACK: experimenting with ghost text
 				-- look at `toggle_ghost_text()` function below.
-				ghost_text = true,
+				ghost_text = false,
 			},
 			completion = {
 				completeopt = "menu,menuone,noinsert",
@@ -215,10 +216,11 @@ return {
 					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 				},
 				completion = {
-					border = { "┌", "─", "┐", "│", "┘", "─", "└", "│" },
+					border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
 				},
 			},
 			-- config nvim cmp to work with snippet engine
+
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body)
@@ -227,32 +229,38 @@ return {
 			-- autocompletion sources
 			sources = cmp.config.sources({
 				{ name = "luasnip" }, -- snippets
+				{ name = "lazydev" },
 				{ name = "nvim_lsp" },
 				{ name = "buffer" }, -- text within current buffer
 				{ name = "path" }, -- file system paths
 				{ name = "tailwindcss-colorizer-cmp" },
 			}),
+
 			-- mapping = cmp.mapping.preset.insert({
 			--     ["<C-k>"] = cmp.mapping.select_prev_item(), -- previous suggestion
 			--     ["<C-j>"] = cmp.mapping.select_next_item(), -- next suggestion
 			--     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+
 			--     ["<C-f>"] = cmp.mapping.scroll_docs(4),
 			--     ["<C-Space>"] = cmp.mapping.complete(), -- show completion suggestions
 			--     ["<C-e>"] = cmp.mapping.abort(), -- close completion window
 			--     ["<CR>"] = cmp.mapping.confirm({ select = false }),
+
 			-- }),
 
 			-- NOTE: ! Experimenting with Customized Mappings ! --
 			mapping = cmp.mapping.preset.insert({
-				["<BS>"] = cmp.mapping(function(_fallback)
-					smart_bs()
-				end, { "i", "s" }),
-
-				["<C-b>"] = cmp.mapping.scroll_docs(-4),
+				-- ['<BS>'] = cmp.mapping(function(_fallback)
+				--     smart_bs()
+				-- end, { 'i', 's' }),
 
 				["<C-e>"] = cmp.mapping.abort(), -- close completion window
+				["<C-d>"] = cmp.mapping(function()
+					cmp.close_docs()
+				end, { "i", "s" }),
 
 				["<C-f>"] = cmp.mapping.scroll_docs(4),
+				["<C-b>"] = cmp.mapping.scroll_docs(-4),
 				["<C-j>"] = cmp.mapping(select_next_item),
 				["<C-k>"] = cmp.mapping(select_prev_item),
 				["<C-n>"] = cmp.mapping(select_next_item),
@@ -263,6 +271,16 @@ return {
 				["<C-y>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
 						local entry = cmp.get_selected_entry()
+						confirm(entry)
+					else
+						fallback()
+					end
+				end, { "i", "s" }),
+
+				["<CR>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						local entry = cmp.get_selected_entry()
+
 						confirm(entry)
 					else
 						fallback()
