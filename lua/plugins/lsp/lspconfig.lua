@@ -222,8 +222,8 @@ return {
 		-- })
 
 		-- Add other LSP servers as needed, e.g., gopls, eslint, html, etc.
-		-- lspconfig.gopls.setup({ capabilities = capabilities })
-		-- lspconfig.html.setup({ capabilities = capabilities })
-		-- lspconfig.cssls.setup({ capabilities = capabilities })
+		lspconfig.gopls.setup({ capabilities = capabilities })
+		lspconfig.html.setup({ capabilities = capabilities })
+		lspconfig.cssls.setup({ capabilities = capabilities })
 	end,
 }
